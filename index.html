@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phan Thị Quỳnh Trang (Trang Phan)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* Plan: Mộc (wood) palette. Beige paper, forest green brand, bark brown accent, gold highlight.
+   Layout: sticky tab bar; each tab is its own page (hash routes), built from photos, charts and tables. */
+:root{
+  --bg:#f5efdf; --surface:#fffcf3; --ink:#1f2e1a; --ink-2:#575f48; --line:#ddd2b6; --grid:#e8dfc6; --row:#f9f4e4;
+  --accent:#8a4f17; --brand:#24603a; --on-brand:#fffcf3;
+  --s1:#1e8a5e; --s2:#b5601a; --s3:#dcae1c;
+  --font-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141c11; --surface:#1d2819; --ink:#edf0e0; --ink-2:#b4bda0; --line:#2f3d29; --grid:#25321f; --row:#202d1c;
+    --accent:#d9a45f; --brand:#7fcf9c; --on-brand:#12200f;
+    --s1:#2fb27f; --s2:#b5601a; --s3:#d1ab2c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141c11; --surface:#1d2819; --ink:#edf0e0; --ink-2:#b4bda0; --line:#2f3d29; --grid:#25321f; --row:#202d1c;
+  --accent:#d9a45f; --brand:#7fcf9c; --on-brand:#12200f;
+  --s1:#2fb27f; --s2:#b5601a; --s3:#d1ab2c; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.2;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.6rem,3vw,2.1rem)}
+h3{font-size:1.1rem}
+p{margin:0}
+a{color:var(--brand)}
+img{max-width:100%;display:block}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--surface);padding:8px 12px;border-radius:6px;z-index:60}
+.skip:focus{left:8px}
+[hidden]{display:none!important}
+
+/* tab bar */
+nav.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:14px;height:62px}
+.brand{font-family:var(--font-display);font-weight:600;font-size:1rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto;padding:4px 0}
+.tabs a{color:var(--ink-2);text-decoration:none;font-size:.88rem;padding:9px 12px;border-radius:9px;white-space:nowrap;font-weight:500}
+.tabs a:hover{background:var(--surface);color:var(--ink)}
+.tabs a[aria-current="page"]{background:var(--brand);color:var(--on-brand)}
+.nav-btn{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:10px;border:2px solid var(--brand);color:var(--brand);text-decoration:none;font-weight:600;font-size:.86rem;white-space:nowrap}
+
+/* layout */
+.tab{padding:40px 0 64px}
+.page-head{max-width:72ch;margin-bottom:28px}
+.page-head .kicker{margin-bottom:6px}
+.page-head p{margin-top:10px;color:var(--ink-2)}
+.kicker{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.block{margin-top:44px}
+.block>h2{margin-bottom:6px}
+.block>.sub{color:var(--ink-2);max-width:70ch;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tag{font-size:.74rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:10px;text-decoration:none;font-weight:600;font-size:.95rem}
+.btn.pri{background:var(--brand);color:var(--on-brand)}
+.btn.sec{border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(2rem,4.6vw,3.1rem);margin:10px 0 8px}
+.hero h1 small{display:block;font-size:.5em;font-weight:500;color:var(--ink-2);margin-top:4px}
+.role{font-size:1.1rem;font-weight:500}
+.lede{margin-top:16px;color:var(--ink-2);max-width:60ch}
+.quote{margin-top:20px;padding-left:16px;border-left:3px solid var(--s3);color:var(--ink-2);font-family:var(--font-display);font-size:1.05rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+figure{margin:0}
+.portrait{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--surface);max-width:400px;justify-self:end}
+.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 68%}
+.portrait figcaption,.ph figcaption{font-size:.8rem;color:var(--ink-2);padding:10px 14px}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:40px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.tile b{display:block;font-family:var(--font-display);font-size:2.1rem;line-height:1;color:var(--brand);font-variant-numeric:tabular-nums}
+.tile span{display:block;margin-top:8px;font-size:.84rem;color:var(--ink-2)}
+.note{font-size:.8rem;color:var(--ink-2);margin-top:10px}
+
+/* explore cards */
+.explore a{display:flex;flex-direction:column;gap:0;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;height:100%}
+.explore a:hover{border-color:var(--brand)}
+.explore img{width:100%;height:130px;object-fit:cover}
+.explore div{padding:14px 16px 16px}
+.explore h3{font-size:1.02rem;margin-bottom:4px}
+.explore p{font-size:.86rem;color:var(--ink-2)}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:3px solid var(--s1);display:grid;gap:14px}
+.tl li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:baseline}
+.tl li::before{content:"";position:absolute;left:-33px;top:18px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.tl .y{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.tl .t{font-size:.95rem}
+
+/* path */
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.step{position:relative;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;border-top:4px solid var(--s1)}
+.step+.step{margin-left:24px}
+.step+.step::before{content:"";position:absolute;left:-25px;top:50%;width:24px;height:2px;background:var(--accent)}
+.step+.step::after{content:"";position:absolute;left:-9px;top:calc(50% - 4px);border-left:8px solid var(--accent);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.step .yr{font-size:.78rem;font-weight:600;color:var(--accent);letter-spacing:.04em}
+.step h3{margin:6px 0 8px;font-size:1.05rem}
+.step p{font-size:.88rem;color:var(--ink-2)}
+
+/* charts */
+.chart-title{font-family:var(--font-display);font-size:1.15rem;font-weight:600}
+.chart-sub{font-size:.88rem;color:var(--ink-2);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 6px;font-size:.85rem}
+.legend i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.scroll{overflow-x:auto}
+.gantt-wrap{min-width:880px}
+svg text{font-family:var(--font-body)}
+.mobile-list{display:none}
+.mobile-list h4{margin:16px 0 6px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.mobile-list ul{list-style:none;margin:0;padding:0}
+.mobile-list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.mobile-list li span{color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar-hit{cursor:pointer}
+#tip{position:fixed;z-index:80;pointer-events:none;background:var(--ink);color:var(--bg);padding:8px 12px;border-radius:8px;font-size:.82rem;max-width:300px;opacity:0;transition:opacity .12s}
+#tip b{display:block;font-weight:600}
+details.tbl{margin-top:14px;font-size:.88rem}
+details.tbl summary{cursor:pointer;color:var(--brand);font-weight:600;min-height:32px}
+
+/* tables */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+thead th{background:var(--row);color:var(--ink-2);font-weight:600;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;position:sticky;top:0}
+tbody tr:nth-child(even) td{background:var(--row)}
+tbody tr:last-child td{border-bottom:0}
+td.yrs{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--accent);font-weight:600}
+td small{display:block;color:var(--ink-2);font-size:.82rem}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.76rem;font-weight:600;background:var(--row);border:1px solid var(--line)}
+.pill.now{background:var(--s3);border-color:var(--s3);color:#1f2e1a}
+
+/* photos */
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.ph button{all:unset;display:block;cursor:zoom-in}
+.ph button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.ph img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.ph.tall img{aspect-ratio:3/4}
+.ph.wide{grid-column:span 2}
+.ph.wide img{aspect-ratio:16/9}
+#lb{position:fixed;inset:0;z-index:90;background:rgba(10,18,8,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:12px}
+#lb img{max-width:min(100%,1100px);max-height:80vh;border-radius:10px}
+#lb p{color:#f5efdf;font-size:.9rem;max-width:70ch;text-align:center}
+#lb button{position:absolute;top:14px;right:14px;min-height:44px;min-width:44px;border-radius:10px;border:0;background:#f5efdf;color:#1f2e1a;font-weight:700;font-size:1rem;cursor:pointer}
+
+/* pillars and project cards */
+.pillar .big{font-family:var(--font-display);font-size:2.2rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--brand)}
+.pillar .lab{font-size:.85rem;color:var(--ink-2);margin:6px 0 14px}
+.pillar h3{margin-bottom:6px}
+.pillar p{font-size:.92rem;color:var(--ink-2)}
+.ico{width:36px;height:36px;margin-bottom:14px;color:var(--accent)}
+.proj{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.proj img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.proj .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.proj p{font-size:.92rem;color:var(--ink-2)}
+.proj a.lnk{margin-top:auto;font-weight:600;font-size:.9rem}
+.nophoto{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--row);color:var(--brand);font-family:var(--font-display);font-size:2.6rem;border-bottom:1px solid var(--line)}
+.portfolio{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;background:var(--brand);color:var(--on-brand);border-radius:20px;padding:32px}
+.portfolio h2{color:var(--on-brand)}
+.portfolio p{margin-top:10px;opacity:.92;max-width:56ch}
+.portfolio .btn{background:var(--on-brand);color:var(--brand)}
+.portfolio ul{margin:0;padding-left:18px;font-size:.95rem}
+.portfolio li{margin:6px 0}
+
+/* featured */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font:inherit;font-size:.88rem;color:var(--ink);cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+.feat{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.feat li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.feat a{font-weight:600;text-decoration:none;color:var(--ink);display:block;line-height:1.4}
+.feat a:hover{color:var(--brand);text-decoration:underline}
+.feat small{display:block;margin-top:4px;color:var(--ink-2);font-size:.82rem}
+.recog{display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:28px;align-items:start}
+.yr-list h3{font-size:1rem;margin:0 0 6px;color:var(--ink-2);font-family:var(--font-body);font-weight:600}
+.yr-list ul{list-style:none;margin:0 0 16px;padding:0}
+.yr-list li{padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.yr-list li small{display:block;color:var(--ink-2);font-size:.82rem}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+
+/* quotes */
+.q{display:flex;flex-direction:column;gap:12px}
+.q blockquote{margin:0;font-family:var(--font-display);font-size:1.05rem;line-height:1.5}
+.q cite{font-style:normal;font-size:.88rem;color:var(--ink-2);margin-top:auto}
+.q cite b{display:block;color:var(--ink);font-weight:600}
+.q.big blockquote{font-size:1.2rem}
+.mark{font-family:var(--font-display);font-size:3rem;line-height:.6;color:var(--s3)}
+
+.skills h3{font-size:1rem;margin-bottom:10px}
+.skills ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:.92rem}
+.skills li{margin:6px 0}
+.contact dl{margin:0;display:grid;grid-template-columns:120px 1fr;gap:12px;font-size:.95rem}
+.contact dt{color:var(--ink-2)}
+.contact dd{margin:0;overflow-wrap:anywhere}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-2)}
+
+@media (max-width:1000px){
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .mosaic{grid-template-columns:repeat(2,1fr)}
+  .path{grid-template-columns:1fr 1fr;gap:20px}
+  .step+.step{margin-left:0}
+  .step+.step::before,.step+.step::after{display:none}
+}
+@media (max-width:860px){
+  .hero,.recog,.portfolio{grid-template-columns:1fr}
+  .portrait{justify-self:start}
+  .grid3,.grid2,.feat{grid-template-columns:1fr}
+  .nav-btn{display:none}
+}
+@media (max-width:700px){
+  .gantt-scroll{display:none}
+  .mobile-list{display:block}
+  .path{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .tl li{grid-template-columns:1fr;gap:2px}
+  .brand{display:none}
+  .tabs{margin-left:0}
+  .portfolio{padding:24px}
+  .ph.wide{grid-column:span 2}
+}
+@media (prefers-reduced-motion:reduce){#tip{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="top" aria-label="Site sections">
+  <div class="wrap">
+    <a class="brand" href="#home">Phan Thị Quỳnh Trang (Trang Phan)</a>
+    <div class="tabs" id="tabs">
+      <a href="#home">Home</a>
+      <a href="#journey">Learning journey</a>
+      <a href="#work">Work and impact</a>
+      <a href="#workshops">Workshops</a>
+      <a href="#projects">Projects</a>
+      <a href="#featured">Featured</a>
+      <a href="#voices">Recommendations</a>
+      <a href="#service">Volunteering</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-btn" href="https://esl.trangphan.org">Teaching Portfolio</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<div class="tab" id="t-home">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="kicker">Educator · Lifelong learner · Toronto, Canada</p>
+        <h1>Phan Thị Quỳnh Trang<small>Trang Phan</small></h1>
+        <p class="role">Founder &amp; President, Canada Vietnam Cultural &amp; Educational Council (CVCEC)</p>
+        <p class="lede">Education diplomacy and institutional partnerships. Trang builds trusted, long-term partnerships between schools, school boards, universities, families and public institutions in Canada and Vietnam. This site follows the learning journey behind that work.</p>
+        <p class="quote">“We make a living by what we get, but we make a life by what we give.”</p>
+        <div class="cta">
+          <a class="btn pri" href="https://esl.trangphan.org">Open my Teaching Portfolio</a>
+          <a class="btn sec" href="#journey">See the learning journey</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <img src="img/trang-city-hall.jpg" width="432" height="784" alt="Trang Phan in a red velvet áo dài, hand on heart, in front of a Vietnamese flag and a historic stone building in Toronto">
+        <figcaption>Trang in Toronto, where CVCEC is based.</figcaption>
+      </figure>
+    </div>
+
+    <div class="tiles" role="list">
+      <div class="tile" role="listitem"><b>10+</b><span>years in international education</span></div>
+      <div class="tile" role="listitem"><b>5</b><span>awards and recognitions, 2023 to 2025</span></div>
+      <div class="tile" role="listitem"><b>300+</b><span>students, youth and parents reached with orientation guides</span></div>
+      <div class="tile" role="listitem"><b>10+</b><span>institutional partners across Canada and Vietnam</span></div>
+      <div class="tile" role="listitem"><b>13,000+</b><span>downloads of her teaching resources on Twinkl</span></div>
+    </div>
+    <p class="note">CVCEC figures as of November 2026.</p>
+
+    <div class="block">
+      <h2>Explore</h2>
+      <p class="sub">Each tab opens a different part of the story.</p>
+      <div class="grid4 explore">
+        <a href="#journey"><img src="img/tesol-inquiry-science.jpg" alt="A TESOL class group photo" loading="lazy"><div><h3>Learning journey</h3><p>Degrees, diplomas and a timeline from 2009 to 2027.</p></div></a>
+        <a href="#work"><img src="img/truong-tieng-viet-site.jpg" alt="The Trường Tiếng Việt Của Em website" loading="lazy"><div><h3>Work and impact</h3><p>CVCEC, key numbers and every role in a table.</p></div></a>
+        <a href="#workshops"><img src="img/classin-workshop.jpg" alt="Teachers in a ClassIn blended learning workshop" loading="lazy"><div><h3>Workshops</h3><p>Teacher training and talks, with photos.</p></div></a>
+        <a href="#projects"><img src="img/mentoring-alumni-meet.jpg" alt="Mentoring Program Alumni Meet group photo" loading="lazy"><div><h3>Projects</h3><p>Youth, language, mentoring and EdTech.</p></div></a>
+        <a href="#featured"><img src="img/trang-goal-oriented.jpg" alt="Trang beside a Being Goal Oriented poster" loading="lazy"><div><h3>Featured</h3><p>Press, awards and interviews you can filter.</p></div></a>
+        <a href="#voices"><img src="img/classin-certificates.jpg" alt="Workshop participants holding certificates" loading="lazy"><div><h3>Recommendations</h3><p>Letters from partners and feedback from mentees.</p></div></a>
+        <a href="#service"><img src="img/environment-lab.jpg" alt="Trang at the Environment Lab for Kids booth" loading="lazy"><div><h3>Volunteering</h3><p>Mentoring and webinars.</p></div></a>
+        <a href="#contact"><img src="img/classin-omo-learning.jpg" alt="Trang at a ClassIn OMO Learning booth" loading="lazy"><div><h3>Contact</h3><p>Email, LinkedIn and research profiles.</p></div></a>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>My journey: from the classroom to education diplomacy</h2>
+      <p class="sub">Trang’s path into education did not begin in a classroom. It began in accounting and finance.</p>
+      <ol class="tl">
+        <li><span class="y">2013</span><span class="t">Graduates in Accounting and Finance, Banking Academy of Vietnam.</span></li>
+        <li><span class="y">2015</span><span class="t">Starts teaching English as a freelance teacher and finds her calling.</span></li>
+        <li><span class="y">2016</span><span class="t">Trains in TESOL and begins training teachers with Educap – Australian International TESOL, in cities and provinces across Vietnam.</span></li>
+        <li><span class="y">2019 to 2022</span><span class="t">Brings classroom practice into EdTech and publishing: FLYER, Twinkl and ClassIn.</span></li>
+        <li><span class="y">2021</span><span class="t">Founds the Mentoring Program for Professional Development of Educators.</span></li>
+        <li><span class="y">2022</span><span class="t">Moves to Canada.</span></li>
+        <li><span class="y">2023</span><span class="t">Completes an MA in TESOL at Horizons University (France), on a 50% scholarship.</span></li>
+        <li><span class="y">2024</span><span class="t">Co-authors a book chapter on virtual mentoring (IGI Global) and founds CVCEC in December.</span></li>
+        <li><span class="y">2026</span><span class="t">Launches the Viet Youth Readiness Hub and Trường Tiếng Việt Của Em, completes the University of Toronto’s Leading Urban Change program, and begins Government Relations studies at Seneca Polytechnic.</span></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- ============ JOURNEY ============ -->
+<div class="tab" id="t-journey" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Learning journey</p>
+      <h2>Four stages of learning</h2>
+      <p>From accounting and finance, to TESOL, to a master’s degree, to public policy and government relations.</p>
+    </div>
+    <div class="path">
+      <div class="step"><span class="yr">2009 to 2013</span><h3>Foundations</h3><p>Bachelor’s in Accounting and Finance at the Banking Academy of Vietnam.</p></div>
+      <div class="step"><span class="yr">2015 to 2021</span><h3>Teaching and TESOL</h3><p>Freelance English educator and trainer, with TESOL diplomas from Australia, Hanoi and the UK.</p></div>
+      <div class="step"><span class="yr">2020 to 2023</span><h3>Master’s and mentoring</h3><p>MA in TESOL at Horizons University (France), alongside mentoring programs for educators.</p></div>
+      <div class="step"><span class="yr">2024 onward</span><h3>Education diplomacy</h3><p>CVCEC, the Leading Urban Change program, and Seneca’s Graduate Certificate in Government Relations.</p></div>
+    </div>
+
+    <div class="block">
+      <div class="card">
+        <div class="chart-title">Study and work, 2009 to 2027</div>
+        <div class="chart-sub">Each bar spans the calendar years active. Hover or focus a bar for details.</div>
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--s1)"></i>Study</span>
+          <span><i style="background:var(--s2)"></i>Work</span>
+          <span><i style="background:var(--s3)"></i>Current role</span>
+        </div>
+        <div class="scroll gantt-scroll"><div class="gantt-wrap" id="gantt"></div></div>
+        <div class="mobile-list" id="gantt-list"></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="recog">
+        <div class="card">
+          <div class="chart-title">Programs and roles active each year</div>
+          <div class="chart-sub">Count of study programs and jobs overlapping in each calendar year.</div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:var(--s1)"></i>Study</span>
+            <span><i style="background:var(--s2)"></i>Work</span>
+            <span><i style="background:var(--s3)"></i>Current role</span>
+          </div>
+          <div id="load-chart"></div>
+        </div>
+        <div class="card">
+          <div class="chart-title">Short courses and certificates, by year</div>
+          <div class="chart-sub">Selected certificates.</div>
+          <div class="legend" aria-hidden="true"><span><i style="background:var(--s1)"></i>Certificates</span></div>
+          <div id="cert-chart"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Education</h2>
+      <p class="sub">All credentials are verified by World Education Services (WES).</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Years</th><th>Qualification</th><th>Institution</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="yrs">2026 to 2027</td><td>Graduate Certificate in Government Relations</td><td>Seneca Polytechnic</td><td><span class="pill now">In progress</span></td></tr>
+          <tr><td class="yrs">June 2026</td><td>Leading Urban Change<small>12-week professional development program. CVCEC’s project was selected for the cohort.</small></td><td>University of Toronto, School of Cities</td><td><span class="pill">Completed</span></td></tr>
+          <tr><td class="yrs">2020 to 2023</td><td>Master of Arts in TESOL<small>50% scholarship</small></td><td>Horizons University, France</td><td><span class="pill">Completed</span></td></tr>
+          <tr><td class="yrs">Oct 2021</td><td>Level 7 Postgraduate Diploma in TESOL</td><td>Training Qualifications UK</td><td><span class="pill">Completed</span></td></tr>
+          <tr><td class="yrs">2018 to 2020</td><td>Graduate Diploma in TESOL</td><td>Hanoi University</td><td><span class="pill">Completed</span></td></tr>
+          <tr><td class="yrs">2016 to 2017</td><td>Professional TESOL Diploma</td><td>Australian International TESOL</td><td><span class="pill">Completed</span></td></tr>
+          <tr><td class="yrs">2009 to 2013</td><td>Bachelor’s in Accounting and Finance</td><td>Banking Academy of Vietnam</td><td><span class="pill">Completed</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>Short courses and certificates</h2>
+      <p class="sub">A selection.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Date</th><th>Course</th><th>Issuer</th></tr></thead>
+        <tbody>
+          <tr><td class="yrs">Jun 2025</td><td>Indigenous Canada</td><td>University of Alberta</td></tr>
+          <tr><td class="yrs">Jun 2025</td><td>Project Management Fundamentals</td><td>Microsoft</td></tr>
+          <tr><td class="yrs">Jun 2025</td><td>Communication Strategies for a Virtual Age</td><td>University of Toronto</td></tr>
+          <tr><td class="yrs">Jun 2025</td><td>Collaborate Effectively for Professional Success</td><td>IBM</td></tr>
+          <tr><td class="yrs">Jun 2023</td><td>CPR, AED and First Aid Certification Course</td><td>National Health Care Provider Solutions</td></tr>
+          <tr><td class="yrs">Apr 2023</td><td>Human Rights</td><td>US Institute of Diplomacy in Human Rights</td></tr>
+          <tr><td class="yrs">Oct 2022</td><td>Environment Lab for Kids</td><td>ACCB &amp; US Embassy</td></tr>
+          <tr><td class="yrs">Jul 2019</td><td>Keep Rolling</td><td>Glocal Ventures Inc.</td></tr>
+          <tr><td class="yrs">Jun 2019</td><td>Therapeutic Puppetry</td><td>Hanoi National University of Education</td></tr>
+          <tr><td class="yrs">Nov 2018</td><td>Game of Life</td><td>MASHAV Israel</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>In the classroom</h2>
+      <p class="sub">Learning is shared work. Two moments from Trang’s TESOL teacher-training classes.</p>
+      <div class="mosaic">
+        <figure class="ph wide"><button type="button" data-src="img/tesol-inquiry-science.jpg" data-cap="TESOL class on inquiry-based science in the classroom."><img src="img/tesol-inquiry-science.jpg" alt="Trang with a class of teachers in front of a screen reading Inquiry-based science in the classroom" loading="lazy"></button><figcaption>TESOL class: inquiry-based science in the classroom.</figcaption></figure>
+        <figure class="ph wide"><button type="button" data-src="img/teacher-workshop.jpg" data-cap="Teacher training: a hands-on science activity."><img src="img/teacher-workshop.jpg" alt="Four teachers examining a soil sample during a hands-on activity" loading="lazy"></button><figcaption>Teacher training: a hands-on science activity.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Areas of expertise</h2>
+      <div class="grid3 skills" style="margin-top:16px">
+        <div class="card"><h3>Pathways and readiness</h3><ul><li>International student pathways and readiness</li><li>Student experience, onboarding and transition</li><li>Cross-border program coordination between Canada and Vietnam</li><li>Scholarship strategy and access advice</li></ul></div>
+        <div class="card"><h3>Partnerships and institutions</h3><ul><li>Strategic stakeholder and partnership engagement</li><li>Government, diplomatic and institutional collaboration</li><li>Cross-functional institutional coordination</li><li>Alumni, youth leadership and ambassador frameworks</li></ul></div>
+        <div class="card"><h3>Community and capacity building</h3><ul><li>Policy-aligned public engagement and speaking</li><li>Capacity-building workshops</li><li>Event and forum design for education engagement</li><li>Community-based education engagement</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WORK ============ -->
+<div class="tab" id="t-work" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Work and impact</p>
+      <h2>CVCEC and the work behind it</h2>
+      <p>Trang founded the Canada Vietnam Cultural &amp; Educational Council (CVCEC), a federally incorporated non-profit based in Toronto, in December 2024. It also acts as an institutional connector between Canadian public education and education stakeholders in Vietnam, helping students and families make informed, safe decisions.</p>
+    </div>
+
+    <div class="tiles" role="list" style="margin-top:0">
+      <div class="tile" role="listitem"><b>10+</b><span>years in international education</span></div>
+      <div class="tile" role="listitem"><b>300+</b><span>students, youth and parents reached with orientation guides</span></div>
+      <div class="tile" role="listitem"><b>15+</b><span>core youth leaders trained</span></div>
+      <div class="tile" role="listitem"><b>10+</b><span>institutional partners across Canada and Vietnam</span></div>
+      <div class="tile" role="listitem"><b>13,000+</b><span>downloads of teaching resources on Twinkl</span></div>
+    </div>
+    <p class="note">CVCEC figures as of November 2026.</p>
+
+    <div class="block">
+      <h2>Three strands of CVCEC’s work</h2>
+      <div class="grid3" style="margin-top:16px">
+        <article class="card pillar">
+          <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h10a4 4 0 0 1 4 4v16a3 3 0 0 0-3-3H6z"/><path d="M30 8H20a4 4 0 0 0-4 4v16a3 3 0 0 1 3-3h11z"/></svg>
+          <div class="big">70</div><div class="lab">self-paced Vietnamese lessons</div>
+          <h3>Language and culture</h3>
+          <p>Trường Tiếng Việt Của Em (My Vietnamese School), an online platform for Vietnamese-Canadian children and families, built by a teaching team in Ontario, Manitoba and Prince Edward Island.</p>
+        </article>
+        <article class="card pillar">
+          <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="12" r="4"/><circle cx="25" cy="14" r="3"/><path d="M5 28c0-5 3.6-8 8-8s8 3 8 8"/><path d="M22 22c4-1 9 1 9 6"/></svg>
+          <div class="big">Apr 2026</div><div class="lab">Viet Youth Readiness Hub launched in Toronto</div>
+          <h3>Youth readiness</h3>
+          <p>Orientation sessions, mentoring, civic engagement and youth leadership for Vietnamese students preparing for and settling into Canadian schools.</p>
+        </article>
+        <article class="card pillar">
+          <svg class="ico" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="18" r="4"/><circle cx="28" cy="9" r="4"/><circle cx="28" cy="27" r="4"/><path d="M12 16l12-5M12 20l12 5"/></svg>
+          <div class="big">1 of 16</div><div class="lab">projects in the Leading Urban Change cohort</div>
+          <h3>Institutional partnerships</h3>
+          <p>“Bridging Heritage Language and Cultural Inclusion in Urban Education” was selected for the University of Toronto School of Cities program.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Roles</h2>
+      <p class="sub">Work experience, most recent first.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Years</th><th>Organization</th><th>Role</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td class="yrs">2024 to present</td><td>CVCEC, Toronto</td><td>Founder &amp; President <span class="pill now">Current</span></td><td>Education diplomacy, youth readiness, Vietnamese language and culture.</td></tr>
+          <tr><td class="yrs">2023 to 2024</td><td>OCES Group</td><td>–</td><td>–</td></tr>
+          <tr><td class="yrs">Dec 2022 to May 2023</td><td>Wee College Inc., Canada</td><td>Training and Development Coordinator</td><td>Digitized paper teaching materials, managed the Facebook page, produced marketing materials.</td></tr>
+          <tr><td class="yrs">Nov 2021 to Dec 2022</td><td>Twinkl Vietnam (remote)</td><td>Content Writer/Creator and Ambassador Lead</td><td>Teaching resources with 13,000+ downloads.</td></tr>
+          <tr><td class="yrs">Dec 2019 to Dec 2022</td><td>FLYER (EdTech, remote)</td><td>Academic Program and Partnership Development Specialist</td><td>Programs and partnerships for an EdTech company.</td></tr>
+          <tr><td class="yrs">2018 to 2022</td><td>Canadian high schools</td><td>Booth interpreter (seasonal)</td><td>Interpreting at school fairs.</td></tr>
+          <tr><td class="yrs">2016 to 2021</td><td>Anh Quoc Preschool</td><td>Early Childhood Educator and Senior ESL Teacher</td><td>Early years English teaching.</td></tr>
+          <tr><td class="yrs">Sep 2016 to Nov 2020</td><td>Educap – Australian International TESOL</td><td>Growth Assistant</td><td>TESOL teacher training across Vietnam.</td></tr>
+          <tr><td class="yrs">2015 to 2022</td><td>Freelance</td><td>English Teacher and Corporate Trainer</td><td>English teaching and corporate training.</td></tr>
+          <tr><td class="yrs">2010 to 2012</td><td>Duc Giang General Hospital, Hanoi</td><td>Project Assistant</td><td>WHO Trauma Care Checklist pilot.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <div class="mosaic">
+        <figure class="ph wide"><button type="button" data-src="img/truong-tieng-viet-site.jpg" data-cap="Trường Tiếng Việt Của Em: the learning programs page."><img src="img/truong-tieng-viet-site.jpg" alt="The Trường Tiếng Việt Của Em website, showing learning programs and a buffalo mascot" loading="lazy"></button><figcaption>Trường Tiếng Việt Của Em: the learning programs page.</figcaption></figure>
+        <figure class="ph wide"><button type="button" data-src="img/mentoring-alumni-meet.jpg" data-cap="Mentoring Program Alumni Meet."><img src="img/mentoring-alumni-meet.jpg" alt="Mentoring Program Alumni Meet, a group of mentors holding certificates" loading="lazy"></button><figcaption>Mentoring Program Alumni Meet.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WORKSHOPS ============ -->
+<div class="tab" id="t-workshops" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Workshops and webinars</p>
+      <h2>Teaching teachers, in the room and online</h2>
+      <p>Sincere thanks to the partners, organizations, colleagues and teachers who collaborated on these workshops and webinars. Select a photo to enlarge it.</p>
+    </div>
+
+    <div class="mosaic">
+      <figure class="ph"><button type="button" data-src="img/classin-workshop.jpg" data-cap="A ClassIn blended learning workshop for teachers."><img src="img/classin-workshop.jpg" alt="Teachers with headsets and laptops in a ClassIn workshop room" loading="lazy"></button><figcaption>ClassIn blended learning workshop.</figcaption></figure>
+      <figure class="ph"><button type="button" data-src="img/classin-omo-learning.jpg" data-cap="At the ClassIn OMO Learning booth: Online, Merge, Offline."><img src="img/classin-omo-learning.jpg" alt="Trang holding a session flyer beside a ClassIn OMO Learning banner" loading="lazy"></button><figcaption>ClassIn OMO Learning booth.</figcaption></figure>
+      <figure class="ph"><button type="button" data-src="img/classin-certificates.jpg" data-cap="Workshop participants with their ClassIn certificates."><img src="img/classin-certificates.jpg" alt="Nine participants holding ClassIn certificates" loading="lazy"></button><figcaption>Participants with certificates.</figcaption></figure>
+      <figure class="ph"><button type="button" data-src="img/environment-lab.jpg" data-cap="Environment Lab for Kids in Viet Nam, with ACCB and the US Embassy."><img src="img/environment-lab.jpg" alt="Trang beside the Environment Lab for Kids in Viet Nam banner" loading="lazy"></button><figcaption>Environment Lab for Kids in Viet Nam.</figcaption></figure>
+      <figure class="ph wide"><button type="button" data-src="img/tesol-inquiry-science.jpg" data-cap="Trang’s TESOL class on inquiry-based science."><img src="img/tesol-inquiry-science.jpg" alt="A TESOL class group photo" loading="lazy"></button><figcaption>Trang’s TESOL class.</figcaption></figure>
+      <figure class="ph wide"><button type="button" data-src="img/mentoring-alumni-meet.jpg" data-cap="Mentoring Program Alumni Meet."><img src="img/mentoring-alumni-meet.jpg" alt="Mentoring Program Alumni Meet group photo" loading="lazy"></button><figcaption>Mentoring Program Alumni Meet.</figcaption></figure>
+    </div>
+
+    <div class="block">
+      <h2>Sessions and partners</h2>
+      <div class="table-wrap" style="margin-top:16px"><table>
+        <thead><tr><th>Partner or event</th><th>What Trang did</th><th>Format</th></tr></thead>
+        <tbody>
+          <tr><td>ClassIn Vietnam</td><td>Led a workshop on blended learning: combining classroom teaching with online technology, using digital resources, assessing understanding and planning lessons.</td><td>Workshop</td></tr>
+          <tr><td>Twinkl Vietnam</td><td>Workshops and webinars for educators.</td><td>Video recordings</td></tr>
+          <tr><td>Educap – AIT TESOL</td><td>Taught TESOL classes for teachers.</td><td>Training course</td></tr>
+          <tr><td>ELSA Speak</td><td>Guest session.</td><td>Video</td></tr>
+          <tr><td>The Asian Parent</td><td>Guest session.</td><td>Video</td></tr>
+          <tr><td>VietTESOL Conference 2022</td><td>Moderated the educational technology session.</td><td>Conference</td></tr>
+          <tr><td>TESL Ontario</td><td>Volunteer webinar moderator since 2023.</td><td>Webinars</td></tr>
+          <tr><td>Environment Lab for Kids (ACCB and US Embassy)</td><td>Instructor, 2022.</td><td>Children’s workshop</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <div class="portfolio">
+        <div>
+          <h2>Teaching Portfolio</h2>
+          <p>Where Trang’s classroom practice lives: lesson plans, activities and projects from early years to teacher development.</p>
+          <p style="margin-top:20px"><a class="btn" href="https://esl.trangphan.org">Go to esl.trangphan.org</a></p>
+        </div>
+        <ul>
+          <li>Featured lessons in one lesson-plan format</li>
+          <li>A gallery of classroom activities</li>
+          <li>Projects such as the Dinosaur Project</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROJECTS ============ -->
+<div class="tab" id="t-projects" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Projects</p>
+      <h2>Youth, language, mentoring and EdTech</h2>
+      <p>With thanks to the colleagues, teachers, parents and students who took part.</p>
+    </div>
+    <div class="grid3">
+      <article class="card proj"><div class="nophoto" aria-hidden="true">VYRH</div><div class="body"><span class="tag">Youth · Since April 2026</span><h3>Viet Youth Readiness Hub</h3><p>A flagship youth initiative of CVCEC, launched in Toronto. It helps Vietnamese students prepare for and settle into Canadian schools through orientation sessions, mentoring, civic engagement and youth leadership. It offers a bilingual Study in Canada guide for Vietnamese families.</p><a class="lnk" href="https://duhoccanada.cvcec.org/">Open the guide</a></div></article>
+      <article class="card proj"><img src="img/truong-tieng-viet-site.jpg" alt="The Trường Tiếng Việt Của Em website" loading="lazy"><div class="body"><span class="tag">Language · CVCEC</span><h3>Trường Tiếng Việt Của Em</h3><p>My Vietnamese School: an online platform where Vietnamese-Canadian children learn Vietnamese language and culture at home with their families. It is built by a teaching team in Ontario, Manitoba and Prince Edward Island.</p><a class="lnk" href="https://www.cvcec.org/">Visit CVCEC</a></div></article>
+      <article class="card proj"><img src="img/mentoring-alumni-meet.jpg" alt="Mentoring Program Alumni Meet" loading="lazy"><div class="body"><span class="tag">Mentoring · Since 2021</span><h3>Mentoring Program for Professional Development of Educators</h3><p>Founded by Trang in 2021 and now a CVCEC initiative. Her study of virtual mentoring for ESL teachers became a co-authored book chapter (IGI Global, 2024).</p></div></article>
+      <article class="card proj"><img src="img/environment-lab.jpg" alt="Trang at the Environment Lab for Kids booth" loading="lazy"><div class="body"><span class="tag">Children · 2022</span><h3>Environment Lab for Kids in Viet Nam</h3><p>A hands-on environmental education program with ACCB and the US Embassy, where Trang served as an instructor.</p></div></article>
+      <article class="card proj"><img src="img/classin-certificates.jpg" alt="ClassIn Mentoring Program participants with certificates" loading="lazy"><div class="body"><span class="tag">Mentoring · 2022</span><h3>ClassIn Mentoring Program</h3><p>A mentoring program for teachers and educators in Vietnam. Mentees credit it for broadening their view of education, EdTech and community.</p></div></article>
+      <article class="card proj"><div class="nophoto" aria-hidden="true">13,000+</div><div class="body"><span class="tag">EdTech · 2021 to 2022</span><h3>Twinkl Vietnam</h3><p>As Content Writer/Creator and Ambassador Lead, Trang produced teaching resources that passed 13,000 downloads on Twinkl.</p></div></article>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FEATURED ============ -->
+<div class="tab" id="t-featured" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Featured</p>
+      <h2>Press, awards and interviews</h2>
+      <p>Coverage from Vietnam, Canada and international education media. Filter by type.</p>
+    </div>
+
+    <div class="recog">
+      <div class="card">
+        <div class="chart-title">Recognition by year and type</div>
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--s1)"></i>Award</span>
+          <span><i style="background:var(--s2)"></i>Publication</span>
+          <span><i style="background:var(--s3)"></i>Press</span>
+        </div>
+        <div id="recog-chart"></div>
+      </div>
+      <div class="yr-list" id="recog-list"></div>
+    </div>
+
+    <div class="block">
+      <h2>All features</h2>
+      <div class="chips" role="group" aria-label="Filter features" id="chips" style="margin-top:16px">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="press" aria-pressed="false">Press 2026</button>
+        <button class="chip" type="button" data-f="award" aria-pressed="false">Awards and publications</button>
+        <button class="chip" type="button" data-f="profile" aria-pressed="false">Profiles and interviews</button>
+        <button class="chip" type="button" data-f="partner" aria-pressed="false">From partners</button>
+      </div>
+      <ul class="feat" id="feat">
+        <li data-t="press"><a href="https://sggp.org.vn/truong-tieng-viet-cua-em-o-canada-post879441.html">“Trường Tiếng Việt Của Em” in Canada</a><small>Press · Sài Gòn Giải Phóng · November 2026</small></li>
+        <li data-t="press"><a href="https://en.vietnamplus.vn/expatriate-woman-helps-bridge-vietnam-canada-post348704.vnp">Expatriate woman helps bridge Vietnam and Canada</a><small>Press · Vietnam News Agency (VietnamPlus) · July 2026</small></li>
+        <li data-t="award"><a href="https://www.cvcec.org/honored-to-be-named-among-the-top-10-outstanding-intellectuals-of-the-nation-in-2025">Vietnam’s Top 10 Outstanding Intellectuals of 2025</a><small>Award · Southeast Asia Research Association</small></li>
+        <li data-t="award"><a href="https://eliteeducationmagazine.com/trang-phan-empowering-futures-through-education/">The Most Empowering Women in Education 2024</a><small>Award · The Elite Education Magazine</small></li>
+        <li data-t="award"><a href="https://magazines.theeducationview.com/2023/10-most-influential-edupreneurs-of-the-year-2023-march2023/">10 Most Influential Edupreneurs of 2023</a><small>Award · The Education View (USA)</small></li>
+        <li data-t="award"><a href="https://www.igi-global.com/book/technology-mediated-language-learning-teaching/333646">Technology-Mediated Language Learning and Teaching</a><small>Book chapter on virtual mentoring for ESL teachers · IGI Global · 2024</small></li>
+        <li data-t="profile"><a href="https://www.brainzmagazine.com/post/global-teacher-exclusive-interview-with-phan-thi-quynh-trang">Global Teacher: exclusive interview with Phan Thi Quynh Trang</a><small>Interview · Brainz Magazine</small></li>
+        <li data-t="profile"><a href="https://giaoducthoidai.vn/10-nha-giao-duc-co-tam-anh-huong-nhat-nam-tu-hao-co-nguoi-viet-post624526.html">Vietnamese educator among the 10 Most Influential Edupreneurs of 2023</a><small>Profile · Giáo dục &amp; Thời đại</small></li>
+        <li data-t="profile"><a href="https://vanhoavaphattrien.vn/nha-giao-duc-trang-phan-nguoi-me-nuoi-duong-tinh-hoa-viet-tro-thanh-cong-dan-toan-cau-a21094.html">Educator Trang Phan: A mother nurturing Vietnamese values in global citizens</a><small>Profile · Văn hóa và Phát triển</small></li>
+        <li data-t="profile"><a href="https://ketnoithuonghieu.vn/trang-phan-nha-giao-duc-mang-cai-tam-dua-giao-duc-ngoai-ngu-viet-nam-gan-hon-voi-the-gioi-a8806.html">Trang Phan: An educator bringing Vietnamese as a foreign language to the world</a><small>Profile · Kết nối thương hiệu</small></li>
+        <li data-t="profile"><a href="https://kinhtevadautu.vn/gap-go-nha-giao-duc-trang-phan-su-menh-cua-toi-la-cong-hien-nhieu-gia-tri-cho-cong-dong-dac-biet-la-viet-nam-3787.html">Educator Trang Phan: “My mission is to contribute many values to the Vietnamese community.”</a><small>Interview · Kinh tế &amp; Đầu tư</small></li>
+        <li data-t="profile"><a href="https://yeah1.com/doi-song/nguoi-tre-phat-huy-truyen-thong-hieu-hoc-cua-cha-ong-de-phat-trien-giao-duc-a59-d107175.html">Education is promoted by young people by following the studious tradition of their ancestors</a><small>Profile · Yeah1</small></li>
+        <li data-t="partner"><a href="https://www.twinkl.ca/blog/trang-phan-twinkl">Meet Ms. Trang Phan, an educator who has a heart for the profession</a><small>Twinkl Educational Publishing House</small></li>
+        <li data-t="partner"><a href="https://www.twinkl.com.vn/blog/giao-duc-som-cho-tre">Learn about early education methods for preschoolers from experts</a><small>Twinkl Educational Publishing House</small></li>
+        <li data-t="partner"><a href="https://classin.com.vn/blog/chuyen-doi-so-va-doi-moi-cach-tiep-can-giao-duc-trong-tam-cua-hoi-nghi-quoc-te-viettesol-2022/">Digital transformation and innovative approach to education</a><small>ClassIn Vietnam · VietTESOL 2022</small></li>
+        <li data-t="partner"><a href="https://classin.com.vn/blog/trang-phan-dung-sau-classin-mentoring-mua-1/">Trang Phan behind ClassIn Mentoring, Season 1</a><small>ClassIn Vietnam</small></li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <div class="mosaic">
+        <figure class="ph wide"><button type="button" data-src="img/trang-goal-oriented.jpg" data-cap="Trang with her Being Goal Oriented poster."><img src="img/trang-goal-oriented.jpg" alt="Trang smiling beside a Being Goal Oriented poster" loading="lazy"></button><figcaption>Trang with her “Being Goal Oriented” poster.</figcaption></figure>
+        <figure class="ph wide"><button type="button" data-src="img/trang-city-hall.jpg" data-cap="Trang in Toronto."><img src="img/trang-city-hall.jpg" alt="Trang in a red áo dài in front of a Vietnamese flag" loading="lazy" style="object-position:50% 70%"></button><figcaption>Trang in Toronto.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VOICES ============ -->
+<div class="tab" id="t-voices" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Recommendations and testimonials</p>
+      <h2>What partners and mentees say</h2>
+      <p>Letters from partners and colleagues, and feedback shared anonymously by mentees and teachers at the close of Trang’s mentoring and teacher development programs.</p>
+    </div>
+
+    <h2 style="margin-bottom:16px">Recommendation letters</h2>
+    <div class="grid3">
+      <article class="card q big"><span class="mark" aria-hidden="true">“</span><blockquote>Our organization has had a strong and positive relationship with Trang since 2023.</blockquote><cite><b>Mr. Nick Moore</b>Global Director, Groups &amp; Juniors, Holmes Education Group</cite></article>
+      <article class="card q big"><span class="mark" aria-hidden="true">“</span><blockquote>Trang Phan is one of the individuals I have worked with who uniquely stands out.</blockquote><cite><b>Ms. Cao Thanh Huyền</b>Director, EDUCAP JSC, AIT TESOL Representative</cite></article>
+      <article class="card q big"><span class="mark" aria-hidden="true">“</span><blockquote>…her outstanding contributions to our International Youth Program.</blockquote><cite><b>Mr. Ajmal Roshan</b>Director, International Youth Program</cite></article>
+    </div>
+
+    <div class="block">
+      <h2>Who has written</h2>
+      <div class="table-wrap" style="margin-top:16px"><table>
+        <thead><tr><th>Name</th><th>Position</th><th>Organization</th></tr></thead>
+        <tbody>
+          <tr><td>Mr. Nick Moore</td><td>Global Director, Groups &amp; Juniors</td><td>Holmes Education Group</td></tr>
+          <tr><td>Ms. Cao Thanh Huyền</td><td>Director, AIT TESOL Representative</td><td>EDUCAP JSC</td></tr>
+          <tr><td>Mr. Ajmal Roshan</td><td>Director, International Youth Program</td><td>–</td></tr>
+          <tr><td>Mr. Abdul Josef</td><td>Marketing Leader</td><td>Southern Ontario Collegiate Canada</td></tr>
+          <tr><td>Ms. Melody Munro</td><td>CEO &amp; Founder</td><td>Wee College Canada</td></tr>
+          <tr><td>Mr. Muhammad</td><td>President</td><td>Southern Ontario Collegiate Canada</td></tr>
+          <tr><td>Ms. Nhung Tran</td><td>Representative</td><td>Confederation College Canada</td></tr>
+          <tr><td>Ms. Hằng Phạm</td><td>Country Manager</td><td>Twinkl Vietnam</td></tr>
+          <tr><td>Ms. Tương Trương</td><td>SEA Director</td><td>ClassIn Vietnam</td></tr>
+          <tr><td>Mr. Nhan Do</td><td>CEO &amp; Founder (former COO, ClassIn Vietnam)</td><td>TutorIn</td></tr>
+          <tr><td>Mr. Tung Nguyen Trong</td><td>CEO &amp; Founder</td><td>Flyer.vn</td></tr>
+          <tr><td>Ms. Gin Ngoc Anh</td><td>CEO</td><td>Ginny House</td></tr>
+          <tr><td>Ms. Nga Nguyen</td><td>Lecturer</td><td>Swinburne Vietnam</td></tr>
+          <tr><td>Mr. Vincent Le</td><td>CEO &amp; Chairman</td><td>2G Education</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="block">
+      <h2>Testimonials</h2>
+      <p class="sub">Shared anonymously via Mentimeter, including from the ClassIn Mentoring Program 2022.</p>
+      <div class="grid3">
+        <article class="card q"><blockquote>…she has helped me broaden my horizon about not only about education in general but also about edtech and brand building.</blockquote><cite><b>Tam</b>Mentee, ClassIn Mentoring Program 2022</cite></article>
+        <article class="card q"><blockquote>Once she starts something, she always puts in 100% and she is truly a great leader.</blockquote><cite><b>Mentee</b>ClassIn Mentoring Program</cite></article>
+        <article class="card q"><blockquote>She is truly an inspirational and enthusiastic leader. I would highly recommend her for any projects related to personal development.</blockquote><cite><b>Mentee</b>Mentoring Program</cite></article>
+        <article class="card q"><blockquote>She's good at encouraging team members to keep motivation and pursue particular targets and guiding them to think globally of teaching career journey…</blockquote><cite><b>Anonymous participant</b>Mentoring Program</cite></article>
+        <article class="card q"><blockquote>A great teacher and mentor, Mrs. Trang Phan has made a lasting impression on me.</blockquote><cite><b>Anonymous participant</b>Teaching and professional growth</cite></article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SERVICE ============ -->
+<div class="tab" id="t-service" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Volunteering and professional service</p>
+      <h2>Giving time to educators and young people</h2>
+      <p>Trang volunteers through webinars and mentoring programs, and shares her work through speaking and media.</p>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Years</th><th>Role</th><th>Organization</th><th>What it involves</th></tr></thead>
+      <tbody>
+        <tr><td class="yrs">2023 to present</td><td>Volunteer Webinar Moderator <span class="pill now">Current</span></td><td>TESL Ontario</td><td>Webinar logistics, speaker preparation and technical support; live chat moderation and Q&amp;A; recordings, materials and feedback for ESL educators.</td></tr>
+        <tr><td class="yrs">2023 to present</td><td>Mentor <span class="pill now">Current</span></td><td>Open Education for a Better World</td><td>Mentoring for open education projects.</td></tr>
+        <tr><td class="yrs">2017 to 2024</td><td>Mentor, Asia Mentoring Program</td><td>RMIT University</td><td>Promoted confidence, self-advocacy and community engagement through tailored support and mentorship.</td></tr>
+        <tr><td class="yrs">Ongoing</td><td>Senior Level Executive Contributor</td><td>Brainz Magazine</td><td>Articles on education diplomacy and cross-border cooperation.</td></tr>
+        <tr><td class="yrs">Guest</td><td>Guest speaker</td><td>VTV1, “Vì Tầm Vóc Việt”</td><td>Homeschooling or not, and building good habits for children, including smartphone and TV use.</td></tr>
+        <tr><td class="yrs">2022</td><td>Moderator</td><td>VietTESOL Conference 2022</td><td>Moderated the educational technology session.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="block">
+      <h2>Learning as a participant</h2>
+      <p class="sub">Professional learning in 2026.</p>
+      <div class="grid2">
+        <article class="card"><h3>CBIE QS Masterclass</h3><p style="color:var(--ink-2);margin-top:6px;font-size:.92rem">Participant.</p></article>
+        <article class="card"><h3>8th Ontario K-12 International Education Conference</h3><p style="color:var(--ink-2);margin-top:6px;font-size:.92rem">Participant, 2026.</p></article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div class="tab" id="t-contact" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="kicker">Contact</p>
+      <h2>Let’s connect</h2>
+      <p>Trang welcomes conversations with schools, school boards, universities, public institutions and community partners who share a commitment to education and people-to-people connection between Canada and Vietnam.</p>
+    </div>
+    <div class="grid2">
+      <div class="card contact">
+        <dl>
+          <dt>Email</dt><dd>trang.ptq@cvcec.org</dd>
+          <dt>Organization</dt><dd>Canada Vietnam Cultural &amp; Educational Council<br>Suite 300, 192 Spadina Avenue, Toronto, ON M5T 2C2</dd>
+          <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/phan-thi-quynh-trang-cvcec">linkedin.com/in/phan-thi-quynh-trang-cvcec</a></dd>
+        </dl>
+      </div>
+      <div class="card contact">
+        <dl>
+          <dt>Teaching</dt><dd><a href="https://esl.trangphan.org">esl.trangphan.org</a></dd>
+          <dt>ORCID</dt><dd><a href="https://orcid.org/0009-0009-9974-7852">0009-0009-9974-7852</a></dd>
+          <dt>Wikidata</dt><dd><a href="https://www.wikidata.org/wiki/Q142216632">Q142216632</a></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="wrap">Phan Thị Quỳnh Trang (Trang Phan) · Toronto, Canada</div></footer>
+<div id="tip" role="status" aria-live="polite"></div>
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo" hidden><button type="button" id="lb-x" aria-label="Close photo">Close</button><img alt=""><p></p></div>
+
+<script>
+(function(){
+  /* ---------- tabs (hash routes) ---------- */
+  const names=['home','journey','work','workshops','projects','featured','voices','service','contact'];
+  const links=[...document.querySelectorAll('#tabs a')];
+  function route(){
+    let h=location.hash.slice(1);if(names.indexOf(h)<0)h='home';
+    names.forEach(n=>{document.getElementById('t-'+n).hidden=(n!==h);});
+    links.forEach(a=>{if(a.getAttribute('href')==='#'+h){a.setAttribute('aria-current','page');a.scrollIntoView({inline:'center',block:'nearest'});}else a.removeAttribute('aria-current');});
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',route);route();
+
+  /* ---------- tooltip ---------- */
+  const NS='http://www.w3.org/2000/svg';
+  const tip=document.getElementById('tip');
+  function showTip(html,x,y){tip.innerHTML=html;tip.style.opacity=1;const w=tip.offsetWidth;tip.style.left=Math.max(8,Math.min(x+14,window.innerWidth-w-8))+'px';tip.style.top=(y+14)+'px';}
+  function hideTip(){tip.style.opacity=0;}
+  function el(name,attrs,parent){const e=document.createElementNS(NS,name);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+  function bindTip(node,html){
+    node.addEventListener('mousemove',ev=>showTip(html,ev.clientX,ev.clientY));
+    node.addEventListener('mouseleave',hideTip);
+    node.addEventListener('focus',()=>{const r=node.getBoundingClientRect();showTip(html,r.left+r.width/2,r.bottom);});
+    node.addEventListener('blur',hideTip);
+  }
+
+  /* ---------- lightbox ---------- */
+  const lb=document.getElementById('lb'),lbi=lb.querySelector('img'),lbp=lb.querySelector('p');
+  let lastBtn=null;
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.ph button');
+    if(b){lastBtn=b;lbi.src=b.dataset.src;lbi.alt=b.querySelector('img').alt;lbp.textContent=b.dataset.cap;lb.hidden=false;document.getElementById('lb-x').focus();return;}
+    if(e.target===lb||e.target.id==='lb-x'){closeLb();}
+  });
+  function closeLb(){lb.hidden=true;if(lastBtn)lastBtn.focus();}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)closeLb();});
+
+  /* ---------- Gantt: study and work ---------- */
+  const rows=[
+    {g:'Study'},
+    {t:'Accounting and Finance (Bachelor’s)',s:'Banking Academy of Vietnam',a:2009,b:2013,k:'study'},
+    {t:'Professional TESOL Diploma',s:'Australian International TESOL',a:2016,b:2017,k:'study'},
+    {t:'Graduate Diploma in TESOL',s:'Hanoi University',a:2018,b:2020,k:'study'},
+    {t:'MA in TESOL',s:'Horizons University, France',a:2020,b:2023,k:'study'},
+    {t:'Level 7 Postgraduate Diploma in TESOL',s:'Training Qualifications UK (Oct 2021)',a:2021,b:2021,k:'study'},
+    {t:'Leading Urban Change',s:'University of Toronto, School of Cities',a:2026,b:2026,k:'study'},
+    {t:'Graduate Certificate in Government Relations',s:'Seneca Polytechnic (in progress)',a:2026,b:2027,k:'study'},
+    {g:'Work and leadership'},
+    {t:'WHO Trauma Care Checklist Pilot',s:'Project Assistant, Duc Giang General Hospital',a:2010,b:2012,k:'work'},
+    {t:'Freelance English Teacher & Corporate Trainer',s:'English teaching and corporate training',a:2015,b:2022,k:'work'},
+    {t:'Anh Quoc Preschool',s:'Early Childhood Educator / Senior ESL Teacher',a:2016,b:2021,k:'work'},
+    {t:'Educap – Australian International TESOL',s:'Growth Assistant',a:2016,b:2020,k:'work'},
+    {t:'Booth interpreting for Canadian high schools',s:'Seasonal',a:2018,b:2022,k:'work'},
+    {t:'FLYER EdTech',s:'Academic Program & Partnership Development',a:2019,b:2022,k:'work'},
+    {t:'Twinkl Vietnam',s:'Content Writer/Creator & Ambassador Lead',a:2021,b:2022,k:'work'},
+    {t:'Wee College',s:'Training and Development Coordinator',a:2022,b:2023,k:'work'},
+    {t:'OCES Group',s:'',a:2023,b:2024,k:'work'},
+    {t:'CVCEC',s:'Founder & President',a:2024,b:2026,k:'now',now:true}
+  ];
+  const color={study:'var(--s1)',work:'var(--s2)',now:'var(--s3)'};
+  const Y0=2009,Y1=2028;
+  function span(r){return r.now?r.a+'–present':(r.a===r.b?String(r.a):r.a+'–'+r.b);}
+  (function gantt(){
+    const W=1000,L=310,R=16,top=34,gh=30,rh=40,n=Y1-Y0,cw=(W-L-R)/n;
+    let H=top;rows.forEach(r=>{H+=r.g?gh:rh;});H+=24;
+    const host=document.getElementById('gantt');
+    const svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:'100%',role:'img','aria-label':'Timeline of study and work from 2009 to 2027'},host);
+    for(let i=0;i<=n;i++){
+      const x=L+i*cw;
+      el('line',{x1:x,x2:x,y1:top-6,y2:H-18,stroke:'var(--grid)','stroke-width':1},svg);
+      if(i<n){const t=el('text',{x:x+cw/2,y:top-14,'text-anchor':'middle','font-size':10.5,fill:'var(--ink-2)'},svg);t.textContent=Y0+i;}
+    }
+    let y=top;
+    rows.forEach(r=>{
+      if(r.g){
+        const t=el('text',{x:0,y:y+20,'font-size':11,'font-weight':600,'letter-spacing':'0.06em',fill:'var(--ink-2)'},svg);t.textContent=r.g.toUpperCase();
+        y+=gh;return;
+      }
+      const cy=y+rh/2;
+      const t1=el('text',{x:0,y:r.s?cy-3:cy+4,'font-size':12.5,'font-weight':600,fill:'var(--ink)'},svg);t1.textContent=r.t;
+      if(r.s){const t2=el('text',{x:0,y:cy+12,'font-size':11,fill:'var(--ink-2)'},svg);t2.textContent=r.s;}
+      const x1=L+(r.a-Y0)*cw+1.5;
+      const endY=r.now?2026.9:r.b+1;
+      const x2=L+(endY-Y0)*cw-1.5;
+      const g=el('g',{class:'bar-hit',tabindex:0,role:'img','aria-label':r.t+', '+span(r)},svg);
+      el('rect',{x:x1-2,y:cy-14,width:x2-x1+4,height:28,fill:'transparent'},g);
+      el('rect',{x:x1,y:cy-6,width:x2-x1,height:12,rx:4,fill:color[r.k]},g);
+      const lab=span(r);
+      const dt=el('text',{'font-size':11,fill:'var(--ink-2)',y:cy+4},svg);
+      if(x2+64<W){dt.setAttribute('x',x2+8);}else{dt.setAttribute('x',x1-8);dt.setAttribute('text-anchor','end');}
+      dt.textContent=lab;
+      bindTip(g,'<b>'+r.t+'</b>'+(r.s?r.s+'<br>':'')+lab);
+      y+=rh;
+    });
+    const mx=L+(2022-Y0)*cw;
+    el('line',{x1:mx,x2:mx,y1:top-6,y2:H-18,stroke:'var(--accent)','stroke-width':1.5,'stroke-dasharray':'4 4'},svg);
+    const mt=el('text',{x:mx+6,y:H-4,'font-size':11,fill:'var(--accent)','font-weight':600},svg);mt.textContent='2022: moves to Canada';
+  })();
+  (function mobileList(){
+    const ml=document.getElementById('gantt-list');
+    let cur=null,list='';
+    rows.forEach(r=>{
+      if(r.g){if(cur!==null)list+='</ul>';list+='<h4>'+r.g+'</h4><ul>';cur=r.g;return;}
+      list+='<li><div><b>'+r.t+'</b>'+(r.s?'<br><small>'+r.s+'</small>':'')+'</div><span>'+span(r)+'</span></li>';
+    });
+    ml.innerHTML=list+'</ul>';
+  })();
+
+  /* ---------- generic stacked column chart ---------- */
+  function stacked(host,o){
+    const cats=o.cats,W=o.W,H=o.H,l=34,b=36,t=14,r=8;
+    const cw=(W-l-r)/cats.length;
+    let max=1;
+    cats.forEach(c=>{let s=0;o.series.forEach(se=>{s+=o.items(c,se.key).length});if(s>max)max=s;});
+    const unit=(H-b-t)/max,bw=Math.min(o.bw,cw-6);
+    const svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:'100%',role:'img','aria-label':o.label},host);
+    for(let v=0;v<=max;v++){
+      const yy=H-b-v*unit;
+      el('line',{x1:l,x2:W-r,y1:yy,y2:yy,stroke:'var(--grid)','stroke-width':1},svg);
+      const tx=el('text',{x:l-8,y:yy+4,'text-anchor':'end','font-size':11,fill:'var(--ink-2)'},svg);tx.textContent=v;
+    }
+    cats.forEach((c,i)=>{
+      const cx=l+i*cw+cw/2;
+      const xt=el('text',{x:cx,y:H-14,'text-anchor':'middle','font-size':o.xs||11.5,fill:'var(--ink)'},svg);xt.textContent=o.xl?o.xl(c):c;
+      let level=0;
+      o.series.forEach(se=>{
+        const its=o.items(c,se.key);
+        if(!its.length)return;
+        const h=its.length*unit,y=H-b-level-h;
+        const g=el('g',{class:'bar-hit',tabindex:0,role:'img','aria-label':c+', '+its.length+' '+se.label.toLowerCase()},svg);
+        el('rect',{x:cx-bw/2,y:y+1,width:bw,height:Math.max(h-2,2),rx:3,fill:se.color},g);
+        if(bw>=22&&h>=18){const num=el('text',{x:cx,y:y+h/2+5,'text-anchor':'middle','font-size':12,'font-weight':600,fill:se.ink},g);num.textContent=its.length;}
+        bindTip(g,'<b>'+c+' · '+se.label+'</b>'+its.join('<br>'));
+        level+=h;
+      });
+    });
+  }
+
+  // programs and roles active each year
+  (function load(){
+    const years=[];for(let y=2009;y<=2026;y++)years.push(y);
+    stacked(document.getElementById('load-chart'),{
+      cats:years,W:560,H:280,bw:22,xs:10,xl:y=>String(y).slice(2),label:'Study programs and roles active in each year, 2009 to 2026',
+      series:[{key:'study',color:'var(--s1)',ink:'#ffffff',label:'Study'},{key:'work',color:'var(--s2)',ink:'#ffffff',label:'Work'},{key:'now',color:'var(--s3)',ink:'#1f2e1a',label:'Current role'}],
+      items:(y,k)=>rows.filter(r=>!r.g&&r.k===k&&r.a<=y&&y<=r.b).map(r=>r.t)
+    });
+  })();
+
+  // certificates by year
+  (function certs(){
+    const c=[[2018,'Game of Life (MASHAV Israel)'],[2019,'Keep Rolling (Glocal Ventures)'],[2019,'Therapeutic Puppetry (Hanoi National University of Education)'],[2022,'Environment Lab for Kids (ACCB & US Embassy)'],[2023,'CPR, AED and First Aid'],[2023,'Human Rights (US Institute of Diplomacy in Human Rights)'],[2025,'Indigenous Canada (U of Alberta)'],[2025,'Project Management Fundamentals (Microsoft)'],[2025,'Communication Strategies for a Virtual Age (U of Toronto)'],[2025,'Collaborate Effectively for Professional Success (IBM)']];
+    stacked(document.getElementById('cert-chart'),{
+      cats:[2018,2019,2020,2021,2022,2023,2024,2025],W:420,H:280,bw:40,label:'Selected short courses and certificates by year',
+      series:[{key:'c',color:'var(--s1)',ink:'#ffffff',label:'Certificates'}],
+      items:(y)=>c.filter(x=>x[0]===y).map(x=>x[1])
+    });
+  })();
+
+  /* ---------- recognition ---------- */
+  const items=[
+    {y:2023,k:'award',n:'10 Most Influential Edupreneurs of 2023',s:'The Education View (USA)'},
+    {y:2023,k:'award',n:'CREA Global Award',s:'Brainz Magazine'},
+    {y:2024,k:'award',n:'The Most Empowering Women in Education 2024',s:'The Elite Education Magazine'},
+    {y:2024,k:'pub',n:'Book chapter on virtual mentoring for ESL teachers',s:'Technology-Mediated Language Learning and Teaching, IGI Global'},
+    {y:2025,k:'award',n:'Vietnam’s Top 10 Outstanding Intellectuals of 2025',s:'Southeast Asia Research Association'},
+    {y:2025,k:'award',n:'The Most Inspiring Education Leaders for 2025',s:'Southeast Asia Research Association'},
+    {y:2026,k:'press',n:'Expatriate woman helps bridge Vietnam and Canada',s:'Vietnam News Agency (VietnamPlus), July 2026'},
+    {y:2026,k:'press',n:'“Trường Tiếng Việt Của Em” in Canada',s:'Sài Gòn Giải Phóng, November 2026'}
+  ];
+  const kc={award:'var(--s1)',pub:'var(--s2)',press:'var(--s3)'};
+  const kn={award:'Award',pub:'Publication',press:'Press'};
+  stacked(document.getElementById('recog-chart'),{
+    cats:[2023,2024,2025,2026],W:420,H:270,bw:54,xs:12,label:'Awards, publications and press items per year, 2023 to 2026',
+    series:[{key:'award',color:'var(--s1)',ink:'#ffffff',label:'Award'},{key:'pub',color:'var(--s2)',ink:'#ffffff',label:'Publication'},{key:'press',color:'var(--s3)',ink:'#1f2e1a',label:'Press'}],
+    items:(y,k)=>items.filter(o=>o.y===y&&o.k===k).map(o=>o.n)
+  });
+  (function recogList(){
+    let html='';
+    [2026,2025,2024,2023].forEach(yr=>{
+      html+='<h3>'+yr+'</h3><ul>';
+      items.filter(o=>o.y===yr).forEach(o=>{html+='<li><span class="dot" style="background:'+kc[o.k]+'"></span>'+o.n+'<small>'+kn[o.k]+' · '+o.s+'</small></li>';});
+      html+='</ul>';
+    });
+    document.getElementById('recog-list').innerHTML=html;
+  })();
+
+  /* ---------- featured filter ---------- */
+  const chips=[...document.querySelectorAll('#chips .chip')];
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.setAttribute('aria-pressed',x===c?'true':'false'));
+    const f=c.dataset.f;
+    document.querySelectorAll('#feat li').forEach(li=>{li.hidden=(f!=='all'&&li.dataset.t!==f);});
+  }));
+})();
+</script>
+</body>
+</html>
